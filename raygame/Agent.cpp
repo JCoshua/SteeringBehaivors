@@ -1,29 +1,32 @@
-#include "Player.h"
-#include "InputComponent.h"
+#include "Agent.h"
+#include "Transform2D.h"
 #include "MovementComponent.h"
 #include "SpriteComponent.h"
-#include "Transform2D.h"
-Player::~Player()
-{
-}
+#include "SeekComponent.h"
+#include "FleeComponent.h"
+#include "WanderComponent.h"
+#include "raymath.h"
 
-void Player::start()
+void Agent::start()
 {
 	Actor::start();
 
-	m_inputComponent = dynamic_cast<InputComponent*>(addComponent(new InputComponent()));
 	m_moveComponent = dynamic_cast<MovementComponent*>(addComponent(new MovementComponent()));
 	m_moveComponent->setSpeed(500);
 	m_spriteComponent = dynamic_cast<SpriteComponent*>(addComponent(new SpriteComponent("Images/player.png")));
-	//Set spawn point
-	//Set move speed
-	//Set position clamps
+	m_seekComponent = dynamic_cast<SeekComponent*>(addComponent(new SeekComponent()));
+	m_fleeComponent = dynamic_cast<FleeComponent*>(addComponent(new FleeComponent()));
+	m_wanderComponent = dynamic_cast<WanderComponent*>(addComponent(new WanderComponent(10,10,10)));
 }
 
-void Player::update(float deltaTime)
+void Agent::update(float deltaTime)
 {
-	MathLibrary::Vector2 moveDirection = m_inputComponent->getMoveAxis();
-	m_moveComponent->setVelocity(moveDirection * 200);
+	//Move towards the target
+	m_wanderComponent->changeVelocity(deltaTime);
+	getTransform()->setForward(m_wanderComponent->getVelocity());
+
+	//Multiplys the movedirection with current speed to get Velocity
+	m_moveComponent->setVelocity(m_wanderComponent->getVelocity());
 
 	Actor::update(deltaTime);
 
@@ -37,4 +40,3 @@ void Player::update(float deltaTime)
 	if (getTransform()->getWorldPosition().y > 800)
 		getTransform()->setWorldPostion({ getTransform()->getWorldPosition().x, 0 });
 }
-

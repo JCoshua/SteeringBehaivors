@@ -59,6 +59,18 @@
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="SeekComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FleeComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -104,6 +116,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SpriteComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SeekComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FleeComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
