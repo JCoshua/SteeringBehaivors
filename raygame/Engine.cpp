@@ -5,7 +5,7 @@
 
 bool Engine::m_applicationShouldClose = false;
 Scene** Engine::m_scenes = new Scene*;
-ActorArray Engine::m_actorsToDelete = ActorArray();
+DynamicArray<Actor*> Engine::m_actorsToDelete = DynamicArray<Actor*>();
 int Engine::m_sceneCount = 0;
 int Engine::m_currentSceneIndex = 0;
 
@@ -22,8 +22,8 @@ Engine::Engine()
 void Engine::start()
 {
 	//Initialize window
-	int screenWidth = 700;
-	int screenHeight = 800;
+	int screenWidth = 1920;
+	int screenHeight = 1020;
 	InitWindow(screenWidth, screenHeight, "Intro To C++");
 	SetTargetFPS(0);
 
@@ -128,19 +128,19 @@ int Engine::addScene(Scene* scene)
 	return index;
 }
 
-void Engine::addActorToDeletionList(Actor* actor)
+void Engine::addItemToDeletionList(Actor* actor)
 {
 	//return if the actor is already going to be deleted
 	if (m_actorsToDelete.contains(actor))
 		return;
 
 	//Add actor to deletion list
-	m_actorsToDelete.addActor(actor);
+	m_actorsToDelete.addItem(actor);
 
 	//Add all the actors children to the deletion list
 	for (int i = 0; i < actor->getTransform()->getChildCount(); i++)
 	{
-		m_actorsToDelete.addActor(actor->getTransform()->getChildren()[i]->getOwner());
+		m_actorsToDelete.addItem(actor->getTransform()->getChildren()[i]->getOwner());
 	}
 }
 
@@ -207,7 +207,7 @@ bool Engine::getKeyPressed(int key)
 
 void Engine::destroy(Actor* actor)
 {
-	addActorToDeletionList(actor);
+	addItemToDeletionList(actor);
 }
 
 void Engine::destroyActorsInList()
@@ -216,8 +216,8 @@ void Engine::destroyActorsInList()
 	for (int i = 0; i < m_actorsToDelete.getLength(); i++)
 	{
 		//Remove actor from the scene
-		Actor* actorToDelete = m_actorsToDelete.getActor(i);
-		if (!getCurrentScene()->removeActor(actorToDelete))
+		Actor* actorToDelete = m_actorsToDelete.getItem(i);
+		if (!getCurrentScene()->removeItem(actorToDelete))
 			getCurrentScene()->removeUIElement(actorToDelete);
 
 		//Call actors clean up functions
@@ -229,7 +229,7 @@ void Engine::destroyActorsInList()
 	}
 
 	//Clear the array
-	m_actorsToDelete = ActorArray();
+	m_actorsToDelete = DynamicArray<Actor*>();
 }
 
 void Engine::CloseApplication()

@@ -7,7 +7,7 @@ class InputComponent :
 	public Component
 {
 public:
-	InputComponent(const char* name = "InputComponent") : Component(name) {}
+	InputComponent() : Component() {}
 	~InputComponent();
 	void start() override;
 	void update(float deltaTime) override;

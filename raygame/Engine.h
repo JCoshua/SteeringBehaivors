@@ -2,7 +2,7 @@
 #include "Scene.h"
 #include <Vector2.h>
 #include <cmath>
-#include "ActorArray.h"
+#include "DynamicArray.h"
 class Camera2D;
 
 static class Engine
@@ -101,14 +101,14 @@ private:
     void draw();
     void end();
 
-    static void addActorToDeletionList(Actor* actor);
+    static void addItemToDeletionList(Actor* actor);
     void destroyActorsInList();
 private:
     Camera2D* m_camera;
     static bool m_applicationShouldClose;
     static Scene** m_scenes;
     static int m_sceneCount;
-    static ActorArray m_actorsToDelete;
+    static DynamicArray<Actor*> m_actorsToDelete;
     static int m_currentSceneIndex;
     static const int m_screenWidth = 700;
     static const int m_screenHeight = 800;

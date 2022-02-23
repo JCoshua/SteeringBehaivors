@@ -1,7 +1,7 @@
 #pragma once
 #include <Matrix3.h>
 #include "Actor.h"
-#include "ActorArray.h"
+#include "DynamicArray.h"
 
 class Scene
 {
@@ -38,21 +38,21 @@ public:
     /// Adds the given actor to the array of actors so that the scene may call its update and draw functions.
     /// </summary>
     /// <param name="actor">The actor to add to the scene.</param>
-    void addActor(Actor* actor);
+    void addItem(Actor* actor);
 
     /// <summary>
     /// Removes the actor at the given index. DOES NOT DELETE THE ACTOR!!!
     /// </summary>
     /// <param name="index">The index the actor is in the scene's array.</param>
     /// <returns>False if the index given is out of bounds.</returns>
-    bool removeActor(int index);
+    bool removeItem(int index);
 
     /// <summary>
     /// Removes the actor given if it's in the array. DOES NOT DELETE THE ACTOR!!!
     /// </summary>
     /// <param name="actor">The actor to look for in the scene's array.</param>
     /// <returns>False if the actor is a nullptr or isn't in the array.</returns>
-    bool removeActor(Actor* actor);
+    bool removeItem(Actor* actor);
 
 
 
@@ -67,8 +67,8 @@ public:
     virtual void end();
 
 private:
-    ActorArray m_actors;
-    ActorArray m_UIElements;
+    DynamicArray<Actor*> m_actors;
+    DynamicArray<Actor*> m_UIElements;
     MathLibrary::Matrix3* m_world;
     bool m_started;
     int m_actorCount;

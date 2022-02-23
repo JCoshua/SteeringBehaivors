@@ -5,6 +5,8 @@ class SpriteComponent;
 class SeekComponent;
 class FleeComponent;
 class WanderComponent;
+class PursueComponent;
+class EvadeComponent;
 
 class Agent :
 	public Actor
@@ -23,6 +25,8 @@ private:
 	SeekComponent* m_seekComponent;
 	FleeComponent* m_fleeComponent;
 	WanderComponent* m_wanderComponent;
+	PursueComponent* m_pursueComponent;
+	EvadeComponent* m_evadeComponent;
 	Actor* m_target;
 };
 

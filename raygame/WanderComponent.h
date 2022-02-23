@@ -8,8 +8,8 @@ class WanderComponent :
 	public Component
 {
 public:
-	WanderComponent(float distance, float radius, const char* name = "SeekComponent") : 
-		Component::Component(name) { m_distance = distance, m_radius = radius; };
+	WanderComponent(float distance, float radius) : 
+		Component::Component() { m_distance = distance, m_radius = radius; };
 	~WanderComponent() {};
 
 	void setVelocity(MathLibrary::Vector2 velocity) { m_velocity = velocity; }

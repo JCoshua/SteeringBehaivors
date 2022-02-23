@@ -1,4 +1,5 @@
 #pragma once
+#include <type_traits>
 class Transform2D;
 class Collider;
 class Component;
@@ -87,29 +88,31 @@ public:
     /// </summary>
     /// <param name="component">The new component to attach to the actor</param>
     /// <returns>A reference to the added component</returns>
-    Component* addComponent(Component* component);
+    template<typename T>
+    T* addComponent();
 
     /// <summary>
-    /// Removes the first instance found that matched the component reference
+    /// Adds a component to the end of the component array
     /// </summary>
-    /// <param name="component">The component to remove</param>
-    /// <returns>Flase if the component is not in the array</returns>
-    bool remomveComponent(Component* component);
+    /// <param name="component">The new component to attach to the actor</param>
+    /// <returns>A reference to the added component</returns>
+    Component* addComponent(Component* component);
 
     /// <summary>
     /// Removes the first instance found that matched the component name
     /// </summary>
     /// <param name="component">The name of the component to remove</param>
     /// <returns>Flase if the component is not in the array</returns>
-    bool remomveComponent(const char* name);
+    template<typename T>
+    bool remomveComponent();
 
     /// <summary>
     /// Get the first component instance attached to this actor
     /// that matches the name
     /// </summary>
     /// <param name="name">The name of the desired component</param>
-    Component* getComponent(const char* name);
-    Component* getComponent(int value);
+    template<typename T>
+    T* getComponent();
 
     int getComponentCount() { return m_componentCount; }
 protected:
@@ -122,4 +125,88 @@ private:
     Component** m_component;
     unsigned int m_componentCount;
 };
+
+template<typename T>
+T* Actor::addComponent()
+{
+    T* component = new T();
+    Actor* owner = component->getOwner();
+    //Return null if this component has an owner
+    if (owner)
+        return nullptr;
+
+    component->assignOwner(this);
+    //Create a new array with a size one greater than our old array
+    Component** appendedArray = new Component * [m_componentCount + 1];
+    //Copy the values from the old array to the new array
+    for (int i = 0; i < m_componentCount; i++)
+    {
+        appendedArray[i] = m_component[i];
+    }
+
+    //Set the last value in the new array to be the actor we want to add
+    appendedArray[m_componentCount] = component;
+    component->assignOwner(this);
+
+    if (m_componentCount > 1)
+        delete[] m_component;
+    else if (m_componentCount == 1)
+        delete m_component;
+
+    //Set old array to hold the values of the new array
+    m_component = appendedArray;
+    m_componentCount++;
+
+    return (T*)component;
+}
+
+
+template<typename T>
+bool Actor::remomveComponent()
+{
+    bool componentRemoved = false;
+    //Create a new array with a size one less than our old array 
+    Component** newArray = new Component * [m_componentCount - 1];
+    //Create variable to access tempArray index
+    int j = 0;
+    //Copy values from the old array to the new array
+    for (int i = 0; i < m_componentCount; i++)
+    {
+        //If the current index is not the index that needs to be removed,
+        //add the value into the old array and increment j
+        T* temp = dynamic_cast<T*>(m_component[i]);
+        if (!temp)
+        {
+            newArray[j] = m_component[i];
+            j++;
+        }
+        else
+        {
+            componentRemoved = true;
+        }
+    }
+
+    if (componentRemoved)
+    {
+        m_component = newArray;
+        m_componentCount--;
+    }
+    else
+        delete[] newArray;
+
+    return componentRemoved;
+}
+
+template<typename T>
+T* Actor::getComponent()
+{
+    for (int i = 0; i < m_componentCount; i++)
+    {
+        T* temp = dynamic_cast<T*>(m_component[i]);
+        if (temp)
+            return (T*)m_component[i];
+    }
+
+    return nullptr;
+}
 

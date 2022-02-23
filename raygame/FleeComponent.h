@@ -6,7 +6,7 @@ class FleeComponent :
 	public Component
 {
 public:
-	FleeComponent(const char* name = "SeekComponent") : Component::Component(name) {};
+	FleeComponent() : Component::Component() {};
 	~FleeComponent() {};
 
 	void setVelocity(MathLibrary::Vector2 velocity) { m_velocity = velocity; }

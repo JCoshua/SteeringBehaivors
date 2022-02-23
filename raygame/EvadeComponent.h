@@ -1,12 +1,13 @@
 #pragma once
 #include "Component.h"
 #include <Vector2.h>
-class SeekComponent :
+
+class EvadeComponent :
 	public Component
 {
 public:
-	SeekComponent() : Component::Component() {};
-	~SeekComponent() {};
+	EvadeComponent() : Component::Component() {};
+	~EvadeComponent() {};
 
 	void setVelocity(MathLibrary::Vector2 velocity) { m_velocity = velocity; }
 	MathLibrary::Vector2 getVelocity() { return m_velocity; }

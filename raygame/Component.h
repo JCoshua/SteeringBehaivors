@@ -5,13 +5,7 @@ class Component
 {
 public:
 	Component();
-	Component(const char* name);
 	virtual ~Component();
-
-	/// <summary>
-	/// Gets the name of this component
-	/// </summary>
-	const char* getName() { return m_name; }
 
 	/// <summary>
 	/// Gets the actor that this component is attached to
@@ -38,7 +32,6 @@ public:
 	virtual void onDestroy() {}
 private:
 	Actor* m_owner;
-	const char* m_name;
 	bool m_started;
 };
 

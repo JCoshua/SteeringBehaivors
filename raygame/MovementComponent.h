@@ -6,7 +6,7 @@ class MovementComponent :
 	public Component
 {
 public:
-	MovementComponent(const char* name = "MoveComponent") : Component::Component(name) {};
+	MovementComponent() : Component::Component() {};
 	~MovementComponent() {}
 
 	/// <summary>
