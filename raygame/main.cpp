@@ -16,7 +16,7 @@
 int main()
 {
 	//Hides Console window
-	//ShowWindow(GetConsoleWindow(), SW_HIDE);
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 
 	srand((unsigned int)time);
 	Engine game = Engine();
