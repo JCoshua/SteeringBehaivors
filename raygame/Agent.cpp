@@ -7,6 +7,7 @@
 #include "WanderComponent.h"
 #include "PursueComponent.h"
 #include "EvadeComponent.h"
+#include "ArriveComponent.h"
 
 void Agent::start()
 {
@@ -18,15 +19,16 @@ void Agent::start()
 	m_seekComponent = addComponent<SeekComponent>();
 	m_fleeComponent = addComponent<FleeComponent>();
 	m_pursueComponent = addComponent<PursueComponent>();
-	m_evadeComponent = dynamic_cast<EvadeComponent*>(addComponent(new EvadeComponent(m_target)));
+	m_evadeComponent = addComponent<EvadeComponent>();
+	m_arriveComponent = dynamic_cast<ArriveComponent*>(addComponent(new ArriveComponent(5)));
 	m_wanderComponent = dynamic_cast<WanderComponent*>(addComponent(new WanderComponent(10,10)));
 }
 
 void Agent::update(float deltaTime)
 {
-	m_evadeComponent->changeVelocity(deltaTime);
-	getTransform()->setForward(m_evadeComponent->getVelocity());
-	m_moveComponent->setVelocity(m_evadeComponent->getVelocity());
+	m_arriveComponent->changeVelocity(m_target, deltaTime);
+	getTransform()->setForward(m_arriveComponent->getVelocity());
+	m_moveComponent->setVelocity(m_arriveComponent->getVelocity());
 	
 	//Moves the Agent to the other side of the screen if they hit an edge
 	if (getTransform()->getWorldPosition().x < 0)

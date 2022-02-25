@@ -7,6 +7,7 @@ class FleeComponent;
 class WanderComponent;
 class PursueComponent;
 class EvadeComponent;
+class ArriveComponent;
 
 class Agent :
 	public Actor
@@ -27,6 +28,7 @@ private:
 	WanderComponent* m_wanderComponent;
 	PursueComponent* m_pursueComponent;
 	EvadeComponent* m_evadeComponent;
+	ArriveComponent* m_arriveComponent;
 	Actor* m_target;
 };
 
