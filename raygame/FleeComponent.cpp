@@ -1,10 +1,19 @@
 #include "FleeComponent.h"
+#include "Agent.h"
 #include "Actor.h"
 #include "Transform2D.h"
+#include "MovementComponent.h"
 
-void FleeComponent::changeVelocity(Actor* target, float deltaTime)
+MathLibrary::Vector2 FleeComponent::calculateForce()
 {
-	MathLibrary::Vector2 desiredVelocity = (getOwner()->getTransform()->getWorldPosition() - target->getTransform()->getWorldPosition()).getNormalized() * 150;
-	MathLibrary::Vector2 SteeringForce = desiredVelocity - m_velocity;
-	m_velocity = m_velocity + SteeringForce * deltaTime;
+	if (!getTarget())
+		return { 0,0 };
+
+	MathLibrary::Vector2 directionToTarget = getOwner()->getTransform()->getWorldPosition() 
+		- getTarget()->getTransform()->getWorldPosition();
+
+	MathLibrary::Vector2 desiredVelocity = directionToTarget.getNormalized() * getSteeringForce();
+	MathLibrary::Vector2 steeringForce = desiredVelocity - getAgent()->getMoveComponent()->getVelocity();
+
+	return steeringForce;
 }

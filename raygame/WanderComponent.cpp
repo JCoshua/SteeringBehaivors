@@ -1,25 +1,25 @@
 #include "WanderComponent.h"
-#include "Actor.h"
 #include "Transform2D.h"
-#include "raylib.h"
-#include <stdlib.h>
+#include "MovementComponent.h"
+#include "Actor.h"
+#include "Agent.h"
 
-void WanderComponent::changeVelocity(float deltaTime)
+MathLibrary::Vector2 WanderComponent::calculateForce()
 {
-	MathLibrary::Vector2 target;
-	target.x = rand() % (m_radius * 2 + 1) - m_radius;
-	target.y = rand() % (m_radius * 2 + 1) - m_radius;
-	target = target.getNormalized() * m_radius;
-	target = m_previous + target;
+	if (getSteeringForce() == 0)
+		return MathLibrary::Vector2(0,0);
 
-	m_previous = target;
-	MathLibrary::Vector2 desiredVelocity = (target - getOwner()->getTransform()->getWorldPosition()).getNormalized() * 100;
-	MathLibrary::Vector2 SteeringForce = desiredVelocity - m_velocity;
-	m_velocity = m_velocity + SteeringForce * deltaTime;
-}
+	//Find the agents Position and Direction
+	MathLibrary::Vector2 ownerPos = getOwner()->getTransform()->getWorldPosition();
+	MathLibrary::Vector2 ownerDirection = getAgent()->getMoveComponent()->getVelocity().getNormalized();
+	m_circlePos = ownerPos + (ownerDirection * m_distance);
 
-void WanderComponent::start()
-{
-	Component::start();
-	m_previous = getOwner()->getTransform()->getWorldPosition() + (getOwner()->getTransform()->getForward() * m_distance);
+	//Find a random point on the unit circle and scale it by the radius
+	float randNum = rand() % 201;
+	MathLibrary::Vector2 randDirection = MathLibrary::Vector2(sin(randNum), cos(randNum)).getNormalized() * m_radius;
+	m_target = m_circlePos + randDirection;
+
+	MathLibrary::Vector2 desiredVelocity = (m_target - ownerPos).getNormalized() * getSteeringForce();
+	MathLibrary::Vector2 force = desiredVelocity - getAgent()->getMoveComponent()->getVelocity();
+	return force;
 }

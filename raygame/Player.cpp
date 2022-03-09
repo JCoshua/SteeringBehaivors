@@ -25,7 +25,7 @@ void Player::start()
 void Player::update(float deltaTime)
 {
 	MathLibrary::Vector2 moveDirection = m_inputComponent->getMoveAxis();
-	m_moveComponent->setVelocity(moveDirection.getNormalized() * 100);
+	m_moveComponent->setVelocity(moveDirection.getNormalized() * m_moveComponent->getSpeed());
 	
 
 	//Moves the Agent to the other side of the screen if they hit an edge

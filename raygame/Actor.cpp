@@ -85,6 +85,7 @@ Component* Actor::addComponent(Component* component)
     //Set old array to hold the values of the new array
     m_component = appendedArray;
     m_componentCount++;
+    onAddComponent(component);
 
     return component;
 }

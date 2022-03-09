@@ -77,6 +77,12 @@
     <ClCompile Include="ArriveComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachineComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -143,6 +149,12 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ArriveComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachineComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>

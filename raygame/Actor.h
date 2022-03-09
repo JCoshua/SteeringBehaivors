@@ -99,6 +99,12 @@ public:
     Component* addComponent(Component* component);
 
     /// <summary>
+    /// Called when a component is added
+    /// </summary>
+    /// <param name="component"></param>
+    virtual void onAddComponent(Component* component) {};
+
+    /// <summary>
     /// Removes the first instance found that matched the component name
     /// </summary>
     /// <param name="component">The name of the component to remove</param>
@@ -156,6 +162,7 @@ T* Actor::addComponent()
     //Set old array to hold the values of the new array
     m_component = appendedArray;
     m_componentCount++;
+    onAddComponent(component);
 
     return (T*)component;
 }

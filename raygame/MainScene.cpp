@@ -9,8 +9,11 @@ void MainScene::start()
 	player->getTransform()->setScale({50, 50});
 	addItem(player);
 
-	Agent* agent = new Agent(1060, 610, "Agent", player);
-	agent->getTransform()->setScale({ 50, 50 });
-	addItem(agent);
+	for (int i = 0; i < 501; i++)
+	{
+		Agent* agent = new Agent(1060, 610, "Agent", player);
+		agent->getTransform()->setScale({ 50, 50 });
+		addItem(agent);
+	}
 	
 }
