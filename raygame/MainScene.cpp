@@ -1,19 +1,19 @@
 #include "MainScene.h"
 #include "Player.h"
-#include "Agent.h"
+#include "Enemy.h"
 #include "Transform2D.h"
 
 void MainScene::start()
 {
-	Player* player = new Player(960,510, "Player");
+	Player* player = new Player(400,400, "Player");
 	player->getTransform()->setScale({50, 50});
 	addItem(player);
 
-	for (int i = 0; i < 501; i++)
+	//for (int i = 0; i < 501; i++)
 	{
-		Agent* agent = new Agent(1060, 610, "Agent", player);
-		agent->getTransform()->setScale({ 50, 50 });
-		addItem(agent);
+		Enemy* enemy = new Enemy(560, 610, "Agent", 500, 500, player);
+		enemy->getTransform()->setScale({ 50, 50 });
+		addItem(enemy);
 	}
 	
 }

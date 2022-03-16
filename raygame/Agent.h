@@ -3,14 +3,15 @@
 #include "DynamicArray.h"
 #include "SteeringComponent.h"
 #include <Vector2.h>
-class MovementComponent;
+#include "MovementComponent.h"
 class SpriteComponent;
 
 class Agent :
 	public Actor
 {
 public:
-	Agent(float x, float y, const char* name, Actor* target) : Actor(x, y, name) { m_target = target; }
+	Agent(float x, float y, const char* name, float maxForce, float maxSpeed, Actor* target);
+	Agent(float x, float y, const char* name, float maxForce, float maxSpeed);
 	~Agent();
 
 	void start() override;
@@ -21,7 +22,9 @@ public:
 
 	MovementComponent* getMoveComponent() { return m_moveComponent; }
 
+	Actor* getTarget() { return m_target; }
 	void setTarget(Actor* target) { m_target = target; }
+
 private:
 	DynamicArray<SteeringComponent*> m_steeringComponents;
 	MovementComponent* m_moveComponent;

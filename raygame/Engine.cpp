@@ -22,8 +22,8 @@ Engine::Engine()
 void Engine::start()
 {
 	//Initialize window
-	int screenWidth = 1920;
-	int screenHeight = 1020;
+	int screenWidth = 700;
+	int screenHeight = 800;
 	InitWindow(screenWidth, screenHeight, "Intro To C++");
 	SetTargetFPS(0);
 

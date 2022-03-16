@@ -10,13 +10,27 @@
 #include "ArriveComponent.h"
 #include "StateMachineComponent.h"
 
+Agent::Agent(float x, float y, const char* name, float maxForce, float maxSpeed, Actor* target) : Actor(x, y, name)
+{
+	m_maxForce = maxForce;
+	m_moveComponent = addComponent<MovementComponent>();
+	m_moveComponent->setSpeed(maxSpeed);
+	m_target = target;
+}
+
+Agent::Agent(float x, float y, const char* name, float maxForce, float maxSpeed) : Actor(x, y, name)
+{
+	m_maxForce = maxForce;
+	m_moveComponent = addComponent<MovementComponent>();
+	m_moveComponent->setSpeed(maxSpeed);
+}
+
 void Agent::start()
 {
 	Actor::start();
 
-	m_moveComponent = addComponent<MovementComponent>();
-	m_spriteComponent = dynamic_cast<SpriteComponent*>(addComponent(new SpriteComponent("Images/player.png")));
-	addComponent(new WanderComponent(200, 10, 100));
+	m_spriteComponent = dynamic_cast<SpriteComponent*>(addComponent(new SpriteComponent("Images/enemy.png")));
+	addComponent(new WanderComponent(10000,5,200));
 	addComponent(new SeekComponent(m_target, 150));
 	addComponent(new StateMachineComponent());
 }

@@ -12,6 +12,12 @@
     <Filter Include="Components">
       <UniqueIdentifier>{d685eab1-a06a-497d-b519-4532ab0a0915}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\SteeringComponents">
+      <UniqueIdentifier>{c751972a-7445-4e7e-9831-5ccceb8dc5a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Decisions">
+      <UniqueIdentifier>{a4b9a7ad-ebae-4c57-94d9-c51b7c469ac6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,32 +62,59 @@
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="SeekComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Agent.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FleeComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="WanderComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="PursueComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="EvadeComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ArriveComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="StateMachineComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="SteeringComponent.cpp">
+    <ClCompile Include="BooleanDecision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Decision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DecisionComponent.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderComponent.cpp">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringComponent.cpp">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SeekComponent.cpp">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PursueComponent.cpp">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="FleeComponent.cpp">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="EvadeComponent.cpp">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="ArriveComponent.cpp">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderDecision.cpp">
+      <Filter>Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="SeekDecision.cpp">
+      <Filter>Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="IsAggressiveDecision.cpp">
+      <Filter>Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="InRangeDecision.cpp">
+      <Filter>Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleDecision.cpp">
+      <Filter>Decisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,35 +160,62 @@
     <ClInclude Include="SpriteComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="SeekComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Agent.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FleeComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="WanderComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="DynamicArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PursueComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="EvadeComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ArriveComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SteeringComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="StateMachineComponent.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BooleanDecision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Decision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderComponent.h">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringComponent.h">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="SeekComponent.h">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PursueComponent.h">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="FleeComponent.h">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="EvadeComponent.h">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="ArriveComponent.h">
+      <Filter>Components\SteeringComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderDecision.h">
+      <Filter>Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="SeekDecision.h">
+      <Filter>Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="IsAggressiveDecision.h">
+      <Filter>Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="InRangeDecision.h">
+      <Filter>Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleDecision.h">
+      <Filter>Decisions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
